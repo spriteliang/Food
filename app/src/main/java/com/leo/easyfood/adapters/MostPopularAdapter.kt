@@ -4,13 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.leo.easyfood.databinding.MostPopularCardBinding
-import com.leo.easyfood.pojo.CategoryMeals
+import com.leo.easyfood.databinding.PopularItemsBinding
+import com.leo.easyfood.pojo.MealsByCategory
 
 class MostPopularAdapter : RecyclerView.Adapter<MostPopularAdapter.PopularMealViewHolder>() {
-    lateinit var onItemClick: ((CategoryMeals)->Unit)
-    private var mealsList = ArrayList<CategoryMeals>()
-    fun setMeals(mealsList: ArrayList<CategoryMeals>) {
+    lateinit var onItemClick: ((MealsByCategory) -> Unit)
+    private var mealsList = ArrayList<MealsByCategory>()
+    fun setMeals(mealsList: ArrayList<MealsByCategory>) {
         this.mealsList = mealsList
         notifyDataSetChanged()
     }
@@ -18,7 +18,7 @@ class MostPopularAdapter : RecyclerView.Adapter<MostPopularAdapter.PopularMealVi
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularMealViewHolder {
         return PopularMealViewHolder(
-            MostPopularCardBinding.inflate(
+            PopularItemsBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -35,11 +35,11 @@ class MostPopularAdapter : RecyclerView.Adapter<MostPopularAdapter.PopularMealVi
             .load(mealsList[position].strMealThumb)
             .into(holder.binding.imgPopularMeal)
 
-        holder.itemView.setOnClickListener{
+        holder.itemView.setOnClickListener {
             onItemClick.invoke(mealsList[position])
         }
     }
 
-    class PopularMealViewHolder(val binding: MostPopularCardBinding) :
+    class PopularMealViewHolder(val binding: PopularItemsBinding) :
         RecyclerView.ViewHolder(binding.root)
 }
