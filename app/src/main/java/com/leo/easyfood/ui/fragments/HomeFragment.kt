@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.leo.easyfood.R
 import com.leo.easyfood.adapters.CategoriesAdapter
 import com.leo.easyfood.adapters.MostPopularAdapter
 import com.leo.easyfood.databinding.FragmentHomeBinding
@@ -40,7 +42,7 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        homeMvvm = ViewModelProvider(this)[HomeViewModel::class.java]
-        viewModel=(activity as MainActivity).viewModel
+        viewModel = (activity as MainActivity).viewModel
         popularItemsAdapter = MostPopularAdapter()
         categoriesAdapter = CategoriesAdapter()
 
@@ -72,7 +74,15 @@ class HomeFragment : Fragment() {
         observeCategoriesLivedata()
         onCategoryClick()
 
+        onSearchIconClick()
 
+
+    }
+
+    private fun onSearchIconClick() {
+        binding.imgSearch.setOnClickListener {
+            findNavController().navigate(R.id.action_nav_home_to_searchFragment)
+        }
     }
 
     private fun onCategoryClick() {
